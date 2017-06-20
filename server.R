@@ -53,22 +53,7 @@ shinyServer(function(input, output) {
     alldata = alldata %>% 
       filter(cut %in% input$subset1)
     
-    #if colour is already included as a variable no need to subset it again (would create .1 in column name)
-    # if (expl1=='color'|expl2=='color'|outcome=='color'){
-    #   subdata = alldata[, c(expl1, expl2, outcome)]
-    # }else{
-    #   subdata = alldata[, c(expl1, expl2, outcome, 'color')]  
-    # }
 
-    
-    #only include or exclude pathologies
-    # if(if_excludeinclude=='include'){
-    #   subdata = subdata[subdata$color %in% includeexclude, ]
-    # }
-    # if(if_excludeinclude=='exclude'){
-    #   subdata = subdata[! subdata$color %in% includeexclude, ]
-    # }
-    # 
     subdata = alldata[, c(expl1, expl2, outcome)]
     colnames(subdata) = c('expl1', 'expl2', 'outcome')
     
@@ -101,16 +86,18 @@ shinyServer(function(input, output) {
     
     colnames(subdata) = c('expl1', 'expl2', 'outcome')
     
+    #count instances
     subdata %>% 
       count(expl1, expl2, outcome) ->
       count_outcomes
     
+    #sum instances for totals
     count_outcomes %>% 
       group_by(expl1, expl2) %>% 
       summarise(total = sum(n)) ->
       total_numbers
     
-    summary_table = merge(count_outcomes, total_numbers, by=c('expl1', 'expl2'))
+    summary_table = full_join(count_outcomes, total_numbers, by=c('expl1', 'expl2'))
     
     summary_table$relative = 100*summary_table$n/summary_table$total
     
