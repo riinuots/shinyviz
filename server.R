@@ -11,6 +11,7 @@ alldata = diamonds
 
 alldata$aaa.onepanel = 'ALL' #dummy variable to plot everything on one "panel", i.e. just one plot
 
+#creating categrocal variables by cutting contunuous values into groups
 alldata = alldata %>% 
   mutate(carat.quartiles = cut(carat,
                                breaks = quantile(carat),
@@ -26,7 +27,6 @@ alldata = alldata %>%
                         labels = c('Expensive', 'More expensive', 'Very expensive', 'Ridiculously expensive'))
   )
 
-selected_varnames = read.csv('formatted_varnames_forUI.csv', comment.char = '#', header=T)
 
 #there's a logical for this in the ui
 barplot_type = 'stack' #'fill' or 'stack'
@@ -46,9 +46,7 @@ shinyServer(function(input, output) {
     #expl2 = 'aaa.onepanel'
     #outcome = 'price.quartiles'
 
-    
-    if_excludeinclude = input$diagnosis
-    includeexclude = input$includeexclude
+
     
     alldata = alldata %>% 
       filter(cut %in% input$subset1)
@@ -83,8 +81,6 @@ shinyServer(function(input, output) {
     expl2 = input$explanatory2
     outcome = input$outcome
     
-    
-    colnames(subdata) = c('expl1', 'expl2', 'outcome')
     
     #count instances
     subdata %>% 
@@ -192,7 +188,6 @@ shinyServer(function(input, output) {
   
   # render plot ----------------------------
   
-  #if (input$fixed_width){
   output$myplot = renderPlot({
     
     p = myplot_p()

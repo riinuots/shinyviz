@@ -8,12 +8,7 @@ selected_varnames = read.csv('formatted_varnames_forUI.csv', comment.char = '#',
 allvars = as.character(selected_varnames$vars)
 names(allvars) = as.character(selected_varnames$var_names)
 
-allvars_grouped = list(
-  'General' = allvars[1:which(allvars=='aaa.onepanel')],
-  'Size' = allvars[(which(allvars=='aaa.onepanel')+1):which(allvars=='depth.quartiles')],
-  'Aesthetics' = allvars[(which(allvars=='depth.quartiles')+1):which(allvars=='color')],
-  'Price' = allvars[(which(allvars=='color')+1):length(allvars)]
-)
+
 
 palettes = list(
   'Qualitative' = rev(c('Accent', 'Dark2', 'Paired', 'Pastel1', 'Pastel2', 'Set1', 'Set2', 'Set3')),
@@ -42,17 +37,17 @@ shinyUI(fluidPage(theme = shinytheme("sandstone"),
                              selectInput("explanatory1",
                                          label    = "Explanatory variable:",
                                          selected = c("carat.quartiles"),
-                                         choices  = allvars_grouped,
+                                         choices  = allvars,
                                          multiple = FALSE),
                              selectInput("explanatory2",
                                          label    = "Split by:",
                                          selected = c("aaa.onepanel"),
-                                         choices  = allvars_grouped,
+                                         choices  = allvars,
                                          multiple = FALSE),
                              selectInput("outcome",
                                          label    = "Outcome variable:",
                                          selected = c("color"),
-                                         choices  = allvars_grouped,
+                                         choices  = allvars,
                                          multiple = FALSE),
                              column(12, # A1.2 - relative to total
                                     #this is geom_bar(position = 'fill')
