@@ -1,6 +1,4 @@
 
-<https://riinu.shinyapps.io/shinyviz/>
-
 ![](example_shiny_app.png)
 
 See it in action (quickly run on your computer):
