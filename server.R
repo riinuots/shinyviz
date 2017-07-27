@@ -217,7 +217,7 @@ shinyServer(function(input, output) {
     
     subdata %>% 
       count(expl1, expl2, outcome) %>% 
-      spread(outcome, 'n', fill=0) ->
+      spread(outcome, 'n', fill=0, convert = TRUE) ->
       summary_table
     
     # adding percentage columns
@@ -229,6 +229,7 @@ shinyServer(function(input, output) {
     
     summary_table[, rel_colnames] = 100*summary_table[, number_colnames]/summary_table$total
     
+    summary_table  = summary_table %>% rename_('Explan.' = 'expl1', 'Split' = 'expl2')
     
     summary_table
     
