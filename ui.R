@@ -1,12 +1,16 @@
-rm(list=ls())
+
 
 library(shiny)
 library(shinythemes)
 
-#load('allvars.rda')
+
 selected_varnames = read.csv('formatted_varnames_forUI.csv', comment.char = '#', header=T)
 allvars = as.character(selected_varnames$vars)
 names(allvars) = as.character(selected_varnames$var_names)
+
+default_expl1   = "carat.quartiles"
+default_expl2   = "aaa.onepanel"
+default_outcome = "color"
 
 
 
@@ -36,17 +40,17 @@ shinyUI(fluidPage(theme = shinytheme("sandstone"),
                              # A1.1 - explanatory, split, outcome
                              selectInput("explanatory1",
                                          label    = "Explanatory variable:",
-                                         selected = c("carat.quartiles"),
+                                         selected = c(default_expl1),
                                          choices  = allvars,
                                          multiple = FALSE),
                              selectInput("explanatory2",
                                          label    = "Split by:",
-                                         selected = c("aaa.onepanel"),
+                                         selected = c(default_expl2),
                                          choices  = allvars,
                                          multiple = FALSE),
                              selectInput("outcome",
                                          label    = "Outcome variable:",
-                                         selected = c("color"),
+                                         selected = c(default_outcome),
                                          choices  = allvars,
                                          multiple = FALSE),
                              column(12, # A1.2 - relative to total
