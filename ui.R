@@ -92,12 +92,12 @@ shinyUI(fluidPage(theme = shinytheme("sandstone"),
                                                        #which would be useful if you data for, e.g. 1,2,3,4,5 instead of names
                                                        #without the spaces you get:
                                                        #ERROR: 'selected' must be the values instead of names of 'choices' for the input 'subset1'
-                                                       choices   = list('Ideal '       = 'Ideal',
-                                                                        'Premium '     = 'Premium',
-                                                                        'Very Good '   = 'Very Good',
-                                                                        'Good '        = 'Good',
-                                                                        'Fair '        = 'Fair')
-                                                       ,selected = c('Ideal', 'Premium', 'Very Good', 'Good', 'Fair'))
+                                                       choices   = list("Ideal "       = "Ideal",
+                                                                        "Premium  "    = "Premium",
+                                                                        "Very Good "   = "Very Good",
+                                                                        "Good "        = "Good",
+                                                                        "Fair "        = "Fair")
+                                                       ,selected = c("Ideal", "Premium", "Very Good", "Good", "Fair"))
                                   )
                            ), #end_A3.1
                            column(6, # begin_A3.2

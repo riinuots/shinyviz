@@ -9,34 +9,34 @@ library(scales)
 
 alldata = diamonds
 
-alldata$aaa.onepanel = 'ALL' #dummy variable to plot everything on one "panel", i.e. just one plot
+alldata$aaa.onepanel = "ALL" #dummy variable to plot everything on one "panel", i.e. just one plot
 
 #creating categrocal variables by cutting contunuous values into groups
 alldata = alldata %>% 
   mutate(carat.quartiles = cut(carat,
                                breaks = quantile(carat),
                                include.lowest=TRUE,
-                               labels = c('Small', 'Medium', 'Large', 'Very large')),
-  depth.quartiles = cut(depth,
-                        breaks = quantile(depth),
-                        include.lowest=TRUE,
-                        labels = c('Small', 'Medium', 'Large', 'Very large')),
-  price.quartiles = cut(price,
-                        breaks = quantile(price),
-                        include.lowest=TRUE,
-                        labels = c('Expensive', 'More expensive', 'Very expensive', 'Ridiculously expensive'))
+                               labels = c("Small", "Medium", "Large", "Very large")),
+         depth.quartiles = cut(depth,
+                               breaks = quantile(depth),
+                               include.lowest=TRUE,
+                               labels = c("Small", "Medium", "Large", "Very large")),
+         price.quartiles = cut(price,
+                               breaks = quantile(price),
+                               include.lowest=TRUE,
+                               labels = c("Expensive", "More expensive", "Very expensive", "Ridiculously expensive"))
   )
 
 
 #there's a logical for this in the ui
-barplot_type = 'stack' #'fill' or 'stack'
+barplot_type = "stack" #'fill' or 'stack'
 
 
 shinyServer(function(input, output) {
   
   # subset data --------------------------
   data_subset         <- reactive({     
-    #put requested variables in a list
+    # for convenience
     expl1 = input$explanatory1
     expl2 = input$explanatory2
     outcome = input$outcome
@@ -47,7 +47,7 @@ shinyServer(function(input, output) {
     #outcome = 'price.quartiles'
 
 
-    
+    # Subsetting, variable name "cut" currently hardcoded here...
     alldata = alldata %>% 
       filter(cut %in% input$subset1)
     
