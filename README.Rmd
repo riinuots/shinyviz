@@ -50,6 +50,24 @@ Most of the code in this app very very generecally written so it can be (and has
 * When you run the app now, you should get an error or "match requires vector arguments", that's because we haven't set up the Subetting functionality (and it is still trying to subset for diamond cuts).
 * To be continued...
 
+## Session info
+
+```{r, echo = FALSE, message = FALSE}
+
+library(shiny)
+library(shinythemes)
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+library(forcats)
+library(magrittr)
+library(scales)
+```
+
+
+```{r}
+sessionInfo()
+```
 
 
 
