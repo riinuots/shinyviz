@@ -9,7 +9,7 @@ library(scales)
 
 alldata = diamonds
 
-alldata$aaa.onepanel = "ALL" #dummy variable to plot everything on one "panel", i.e. just one plot
+alldata$aaa.onepanel = factor("ALL") #dummy variable to plot everything on one "panel", i.e. just one plot
 
 #creating categrocal variables by cutting contunuous values into groups
 alldata = alldata %>% 
@@ -133,7 +133,7 @@ shinyServer(function(input, output) {
     
     my_breaks = 0:10/10
     
-    p = ggplot(summary_table, aes(x=expl1, fill = outcome, y=n))+
+    p = ggplot(summary_table, aes(x=expl1, fill = fct_rev(outcome), y=n))+
       geom_bar(position=barplot_type, stat='identity') +
       facet_wrap(~expl2, ncol=1)+
       coord_flip() +
