@@ -1,3 +1,11 @@
+Examples of **shinyviz** being used with real patient data and published papers can be found at:
+
+http://cancer.globalsurg.org
+
+http://ssi.globalsurg.org
+
+To give you access to a fully working codebase, this repository makes use of a publicly available example dataset (diamonds).
+
 
 ![](example_shiny_app.png)
 
